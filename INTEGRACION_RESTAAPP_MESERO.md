@@ -20,6 +20,28 @@ Mesero Web consume esos contratos con el mismo Bearer token, restaurante,
 sucursal y permisos. No copia las plantillas HTML dentro del navegador y no
 calcula ITBIS, propina, totales, NCF o e-NCF.
 
+## Servicio a habitación
+
+El servicio a habitación reutiliza el flujo POS existente; no tiene un
+endpoint paralelo. La web de RestaAPP obtiene las estancias activas mediante
+`GET /ajax/pos/hotel/stays`. Mesero Web envía la orden por
+`POST /pos/orders` con `order_type: "Room Service"`, `room_number` y, por
+defecto, `bill_to: "POST_TO_ROOM"`.
+
+Antes de crear la orden, el backend busca una estancia `checked_in` cuyo
+restaurante, sucursal y habitación coincidan. Cuando la encuentra, persiste
+el contexto existente `context_type: HOTEL_ROOM`, `context_id: <stay_id>` y
+`bill_to`. También normaliza el nombre visible a `Habitación <número>` para
+que el listado web, la KOT y el ticket identifiquen el destino. Si no existe
+una estancia activa o el contexto no pertenece a la sucursal autenticada, la
+orden se rechaza con HTTP 422 y no se crea ninguna orden.
+
+El módulo Hotel muestra esas órdenes en `/hotel/room-service` y puede
+relacionarlas con su folio y el ticket `hotel_room_service`. El cargo al
+folio solo ocurre según el flujo existente y la opción `POST_TO_ROOM`; la
+selección `PAY_NOW` conserva el cobro inmediato. El número de habitación no
+se acepta como sustituto de una estancia válida.
+
 ## Flujo de cuenta y comprobante
 
 1. Antes del cobro, el personal puede solicitar una **precuenta**. Es
