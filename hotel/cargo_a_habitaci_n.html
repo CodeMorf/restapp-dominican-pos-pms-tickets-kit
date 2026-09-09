@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket de Cargo a la Habitación</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Typical thermal printer width */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Header Styles */
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .hotel-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .header-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+            padding: 5px;
+            border: 2px solid #000;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        .header-info {
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            margin: 2px 0;
+        }
+
+        /* Guest Info */
+        .guest-info {
+            border-bottom: 1px dashed #666;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .guest-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .highlight-room {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Items Body */
+        .ticket-body {
+            border-bottom: 1px dashed #666;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .item-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .item-table th {
+            text-align: left;
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+        }
+        .item-table th.right, .item-table td.right {
+            text-align: right;
+        }
+        .item-table td {
+            padding: 4px 0;
+            vertical-align: top;
+        }
+
+        /* Totals */
+        .ticket-totals {
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .total-final {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px solid #000;
+        }
+
+        /* Signature Area */
+        .signature-area {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        .legal-text {
+            font-style: italic;
+            text-align: justify;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .signature-line {
+            width: 90%;
+            margin: 0 auto;
+            border-bottom: 1px solid #000;
+            margin-bottom: 5px;
+        }
+        .doc-line {
+            text-align: left;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .doc-line span {
+            display: inline-block;
+            width: 130px;
+            border-bottom: 1px solid #000;
+        }
+
+        /* Print specific styling */
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .header-title {
+                background-color: transparent !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-header">
+        <h1 class="hotel-name">Hotel Vista Mar</h1>
+        <div class="header-title">CARGO A LA HABITACIÓN</div>
+        <div class="header-info">
+            <span>Fecha: 09/09/2026</span>
+            <span>Hora: 10:15</span>
+        </div>
+        <div class="header-info">
+            <span>Punto Venta: Rest. Principal</span>
+            <span>Ticket: #4502</span>
+        </div>
+    </div>
+
+    <div class="guest-info">
+        <div class="guest-row highlight-room">
+            <span>Habitación:</span>
+            <span>402</span>
+        </div>
+        <div class="guest-row">
+            <span>Huésped:</span>
+            <span>Sr. Alejandro Vásquez</span>
+        </div>
+    </div>
+
+    <div class="ticket-body">
+        <table class="item-table">
+            <thead>
+                <tr>
+                    <th>Cant</th>
+                    <th>Descripción</th>
+                    <th class="right">Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2</td>
+                    <td>Mojito Clásico<br><small>RD$ 400.00 c/u</small></td>
+                    <td class="right">800.00</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Hamburguesa Clásica</td>
+                    <td class="right">550.00</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ensalada César</td>
+                    <td class="right">450.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ticket-totals">
+        <div class="total-row">
+            <span>Subtotal:</span>
+            <span>RD$ 1,800.00</span>
+        </div>
+        <div class="total-row">
+            <span>ITBIS (18%):</span>
+            <span>RD$ 324.00</span>
+        </div>
+        <div class="total-row">
+            <span>Propina Ley (10%):</span>
+            <span>RD$ 180.00</span>
+        </div>
+        <div class="total-row total-final">
+            <span>TOTAL:</span>
+            <span>RD$ 2,304.00</span>
+        </div>
+    </div>
+
+    <div class="signature-area">
+        <div class="legal-text">
+            Reconozco haber recibido los servicios detallados y acepto que el monto total de esta factura sea cargado a mi cuenta de habitación para ser cancelado al momento del Check-Out.
+        </div>
+        
+        <div class="signature-line"></div>
+        <div>Firma del Huésped</div>
+
+        <div class="doc-line">
+            Doc. / Pasaporte: <span></span>
+        </div>
+    </div>
+
+</body>
+</html>

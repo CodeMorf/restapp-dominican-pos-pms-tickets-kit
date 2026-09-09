@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprobante de Check-In</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Typical thermal printer width */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Header Styles */
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .hotel-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .hotel-details {
+            font-size: 12px;
+            margin: 2px 0;
+            color: #333;
+        }
+        .header-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0 0 0;
+            text-decoration: underline;
+        }
+
+        /* Section Styles */
+        .ticket-section {
+            border-bottom: 1px dashed #666;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Data Rows */
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 5px;
+            align-items: flex-end;
+        }
+        .data-label {
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-right: 5px;
+        }
+        .data-value {
+            text-align: right;
+            word-break: break-word;
+        }
+        
+        /* Highlight specific data */
+        .highlight-room {
+            font-size: 22px;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin: 5px 0 10px 0;
+            padding: 5px;
+            border: 2px solid #000;
+        }
+
+        /* Footer / Policies */
+        .ticket-footer {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .policy-text {
+            font-style: italic;
+            margin-top: 5px;
+            color: #333;
+        }
+
+        /* Print specific styling */
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-header">
+        <h1 class="hotel-name">Hotel Vista Mar</h1>
+        <div class="hotel-details">Av. Principal #123, Zona Costera</div>
+        <div class="hotel-details">Tel: (555) 123-4567</div>
+        <h2 class="header-title">Confirmación de Registro / Check-In</h2>
+    </div>
+
+    <div class="ticket-section">
+        <div class="section-title">Datos de la Estadía</div>
+        
+        <span class="highlight-room">HABITACIÓN: 402</span>
+        
+        <div class="data-row">
+            <span class="data-label">Huésped:</span>
+            <span class="data-value">Sr. Alejandro Vásquez</span>
+        </div>
+        <div class="data-row">
+            <span class="data-label">Check-In:</span>
+            <span class="data-value">09/09/2026 15:30</span>
+        </div>
+        <div class="data-row">
+            <span class="data-label">Check-Out:</span>
+            <span class="data-value">12/09/2026</span>
+        </div>
+    </div>
+
+    <div class="ticket-section">
+        <div class="section-title">Detalle Tarifario</div>
+        <div class="data-row">
+            <span class="data-label">Tarifa por Noche:</span>
+            <span class="data-value">RD$ 4,500.00</span>
+        </div>
+        <div class="data-row">
+            <span class="data-label">Ocupantes:</span>
+            <span class="data-value">2 Adultos / 1 Niño</span>
+        </div>
+    </div>
+
+    <div class="ticket-footer">
+        <strong>*** Políticas del Hotel ***</strong>
+        <div class="policy-text">
+            Hora de salida (Check-Out): 11:00 AM.<br><br>
+            Penalidad por pérdida de llave: RD$ 500.<br><br>
+            ¡Le deseamos una excelente estadía!
+        </div>
+    </div>
+
+</body>
+</html>

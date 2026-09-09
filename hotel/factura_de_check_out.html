@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura de Check-Out</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Typical thermal printer width */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            font-size: 13px;
+        }
+
+        /* Header Styles */
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .hotel-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .fiscal-data {
+            font-size: 12px;
+            margin: 2px 0;
+        }
+        .ncf-box {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 5px;
+            border: 2px solid #000;
+        }
+
+        /* Guest Info */
+        .guest-info {
+            border-bottom: 1px dashed #000;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+
+        /* Folio Sections */
+        .folio-section {
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #666;
+            padding-bottom: 5px;
+        }
+        .section-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            background-color: #f0f0f0;
+            padding: 2px;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+            align-items: flex-start;
+        }
+        .item-date {
+            width: 70px;
+            flex-shrink: 0;
+        }
+        .item-desc {
+            flex-grow: 1;
+            padding-right: 5px;
+        }
+        .item-amount {
+            text-align: right;
+            width: 70px;
+            flex-shrink: 0;
+        }
+        .credit {
+            color: #333;
+        }
+
+        /* Totals Area */
+        .totals-area {
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        .tax-note {
+            font-size: 11px;
+            font-style: italic;
+            text-align: right;
+            display: block;
+            margin-top: -3px;
+            margin-bottom: 3px;
+            color: #555;
+        }
+        .grand-total {
+            font-size: 16px;
+            font-weight: bold;
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            margin-top: 5px;
+        }
+        .balance-due {
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #000;
+            color: #fff;
+            padding: 5px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .section-title {
+                background-color: transparent !important;
+                border-bottom: 1px solid #000;
+            }
+            .balance-due {
+                border: 2px solid #000;
+                background-color: transparent !important;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-header">
+        <h1 class="hotel-name">Hotel Vista Mar</h1>
+        <div class="fiscal-data">RNC: 1-01-12345-1</div>
+        <div class="fiscal-data">Av. Principal #123, Zona Costera</div>
+        
+        <div class="ncf-box">
+            <div>FACTURA DE CONSUMO (E)</div>
+            <div>e-NCF: E320000000012</div>
+        </div>
+        
+        <div class="info-row">
+            <span>Fecha: 12/09/2026</span>
+            <span>Hora: 10:45 AM</span>
+        </div>
+    </div>
+
+    <div class="guest-info">
+        <div class="info-row">
+            <span>Habitación: <strong>402</strong></span>
+            <span>Cajero: LRM</span>
+        </div>
+        <div class="info-row">
+            <span>Huésped:</span>
+            <span>Alejandro Vásquez</span>
+        </div>
+        <div class="info-row">
+            <span>Llegada: 09/09</span>
+            <span>Salida: 12/09</span>
+        </div>
+    </div>
+
+    <div class="folio-section">
+        <div class="section-title">Alojamiento</div>
+        <div class="item-row">
+            <span class="item-date">09/09</span>
+            <span class="item-desc">Noche Hospedaje</span>
+            <span class="item-amount">4,500.00</span>
+        </div>
+        <div class="item-row">
+            <span class="item-date">10/09</span>
+            <span class="item-desc">Noche Hospedaje</span>
+            <span class="item-amount">4,500.00</span>
+        </div>
+        <div class="item-row">
+            <span class="item-date">11/09</span>
+            <span class="item-desc">Noche Hospedaje</span>
+            <span class="item-amount">4,500.00</span>
+        </div>
+    </div>
+
+    <div class="folio-section">
+        <div class="section-title">Consumos Extra (A&B)</div>
+        <div class="item-row">
+            <span class="item-date">09/09</span>
+            <span class="item-desc">Rest. Principal (#4502)</span>
+            <span class="item-amount">1,800.00</span>
+        </div>
+        <div class="item-row">
+            <span class="item-date">10/09</span>
+            <span class="item-desc">Bar Piscina (#1046)</span>
+            <span class="item-amount">1,200.00</span>
+        </div>
+    </div>
+
+    <div class="folio-section">
+        <div class="section-title">Abonos / Depósitos</div>
+        <div class="item-row credit">
+            <span class="item-date">09/09</span>
+            <span class="item-desc">Depósito (Tarjeta)</span>
+            <span class="item-amount">-5,000.00</span>
+        </div>
+    </div>
+
+    <div class="totals-area">
+        <div class="total-row">
+            <span>Subtotal Alojamiento:</span>
+            <span>13,500.00</span>
+        </div>
+        <div class="total-row">
+            <span>Subtotal Alim. y Bebidas:</span>
+            <span>3,000.00</span>
+        </div>
+        <div class="total-row" style="margin-top: 5px; font-weight: bold;">
+            <span>Subtotal General:</span>
+            <span>16,500.00</span>
+        </div>
+        
+        <div class="total-row" style="margin-top: 10px;">
+            <span>ITBIS (18%):</span>
+            <span>2,970.00</span>
+        </div>
+        <span class="tax-note">Aplica sobre Alojamiento y A&B</span>
+        
+        <div class="total-row">
+            <span>Propina Legal (10%):</span>
+            <span>300.00</span>
+        </div>
+        <span class="tax-note">Aplica SOLO sobre A&B</span>
+
+        <div class="total-row grand-total">
+            <span>TOTAL FACTURA:</span>
+            <span>RD$ 19,770.00</span>
+        </div>
+        
+        <div class="total-row">
+            <span>Menos Abonos:</span>
+            <span>-5,000.00</span>
+        </div>
+    </div>
+
+    <div class="balance-due">
+        MONTO PAGADO:<br>RD$ 14,770.00
+    </div>
+
+    <div class="footer">
+        <div style="text-align: left; margin-bottom: 10px;">
+            <strong>Método de Pago:</strong><br>
+            Tarjeta de Crédito (VISA ****1234): RD$ 14,770.00<br>
+            Aprobación: 098765
+        </div>
+        <p>¡Gracias por su visita!<br>Vuelva pronto.</p>
+    </div>
+
+</body>
+</html>

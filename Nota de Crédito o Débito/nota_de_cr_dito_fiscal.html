@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota de Crédito (DGII)</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Ancho típico de impresora térmica */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            font-size: 13px;
+        }
+
+        /* Header Styles */
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .hotel-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .fiscal-data {
+            font-size: 12px;
+            margin: 2px 0;
+        }
+
+        /* Fiscal NCF Boxes */
+        .ncf-box {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+            padding: 5px;
+            border: 2px solid #000;
+            background-color: #f0f0f0;
+        }
+        .reference-box {
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            padding: 5px;
+            border: 1px solid #000;
+            border-top: none;
+        }
+
+        /* Info Section */
+        .info-section {
+            border-bottom: 1px dashed #000;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        .reason-text {
+            display: block;
+            margin-top: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Items Body */
+        .items-body {
+            border-bottom: 1px dashed #666;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+            align-items: flex-start;
+        }
+        .item-qty { width: 30px; flex-shrink: 0; }
+        .item-desc { flex-grow: 1; padding-right: 5px; }
+        .item-amount { 
+            text-align: right; 
+            width: 70px; 
+            flex-shrink: 0;
+        }
+        .credit-text { color: #555; } /* Makes it clear this is a deduction */
+
+        /* Totals */
+        .totals-area {
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        .grand-total {
+            font-size: 15px;
+            font-weight: bold;
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            margin-top: 5px;
+        }
+        .refund-box {
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #000;
+            color: #fff;
+            padding: 5px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Footer / Signatures */
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        .signature-line {
+            width: 80%;
+            margin: 25px auto 5px auto;
+            border-bottom: 1px solid #000;
+        }
+        
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .ncf-box { background-color: transparent !important; }
+            .refund-box {
+                border: 2px solid #000;
+                background-color: transparent !important;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-header">
+        <h1 class="hotel-name">Hotel Vista Mar</h1>
+        <div class="fiscal-data">RNC: 1-01-12345-1</div>
+        <div class="fiscal-data">Av. Principal #123, Zona Costera</div>
+        
+        <!-- e-NCF for Electronic Credit Note (E34 series) -->
+        <div class="ncf-box">
+            <div>NOTA DE CRÉDITO (E)</div>
+            <div>e-NCF: E340000000005</div>
+        </div>
+        
+        <!-- Mandatory Reference to original invoice -->
+        <div class="reference-box">
+            MODIFICA FACTURA:<br>
+            e-NCF: E320000000012
+        </div>
+        
+        <div class="info-row">
+            <span>Fecha: 12/09/2026</span>
+            <span>Hora: 11:15 AM</span>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <div class="info-row">
+            <span>Cliente:</span>
+            <span>Alejandro Vásquez</span>
+        </div>
+        <div class="info-row">
+            <span>Habitación:</span>
+            <span>402 (Checkout)</span>
+        </div>
+        <div class="info-row">
+            <span>Cajero:</span>
+            <span>LRM / Gerencia</span>
+        </div>
+        <span class="reason-text">Motivo: Error de facturación en Consumo de Bar (No consumido).</span>
+    </div>
+
+    <div class="items-body">
+        <div class="info-row" style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 3px; margin-bottom: 5px;">
+            <span class="item-qty">Cant</span>
+            <span class="item-desc">Descripción</span>
+            <span class="item-amount">Valor (RD$)</span>
+        </div>
+        
+        <!-- Negative amounts for credit -->
+        <div class="item-row credit-text">
+            <span class="item-qty">-1</span>
+            <span class="item-desc">Cerveza IPA (Bar Piscina)</span>
+            <span class="item-amount">-450.00</span>
+        </div>
+        <div class="item-row credit-text">
+            <span class="item-qty">-1</span>
+            <span class="item-desc">Mojito (Bar Piscina)</span>
+            <span class="item-amount">-400.00</span>
+        </div>
+    </div>
+
+    <div class="totals-area">
+        <div class="total-row credit-text">
+            <span>Subtotal Reversado:</span>
+            <span>-850.00</span>
+        </div>
+        <div class="total-row credit-text">
+            <span>ITBIS Reversado (18%):</span>
+            <span>-153.00</span>
+        </div>
+        <div class="total-row credit-text">
+            <span>Propina Reversada (10%):</span>
+            <span>-85.00</span>
+        </div>
+        
+        <div class="total-row grand-total credit-text">
+            <span>TOTAL A ACREDITAR:</span>
+            <span>RD$ -1,088.00</span>
+        </div>
+    </div>
+
+    <div class="refund-box">
+        MONTO A DEVOLVER:<br>RD$ 1,088.00
+    </div>
+
+    <div class="footer">
+        <div style="text-align: left; margin-bottom: 10px; font-size: 11px;">
+            <strong>Método de Devolución:</strong><br>
+            Reembolso a Tarjeta VISA ****1234<br>
+            Ref. Bancaria: 998877
+        </div>
+        
+        <p style="font-style: italic; color: #555;">Este comprobante legaliza la disminución del ITBIS e ingresos declarados previamente.</p>
+        
+        <div class="signature-line"></div>
+        <div>Firma de Gerencia / Autorización</div>
+    </div>
+
+</body>
+</html>

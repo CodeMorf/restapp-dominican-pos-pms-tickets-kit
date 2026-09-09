@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura de Crédito Fiscal (e-CF)</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Thermal printer width */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            font-size: 13px;
+        }
+
+        /* Header Styles */
+        .ticket-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .hotel-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .fiscal-data {
+            font-size: 12px;
+            margin: 2px 0;
+        }
+
+        /* e-NCF Block - Highly prominent for Tax Credit */
+        .ncf-box {
+            border: 2px solid #000;
+            padding: 8px 5px;
+            margin: 10px 0;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .ncf-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+        .ncf-number {
+            font-size: 18px; /* Larger for easy reading by accountants */
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Mandatory Corporate Client Info */
+        .client-info {
+            border: 2px dashed #000;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            background-color: #fff;
+        }
+        .client-info-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        .highlight-rnc {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Items Table */
+        .ticket-body {
+            border-bottom: 1px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .item-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .item-table th {
+            text-align: left;
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+        }
+        .item-table th.right, .item-table td.right {
+            text-align: right;
+        }
+        .item-table td {
+            padding: 4px 0;
+            vertical-align: top;
+        }
+        .item-qty {
+            width: 25px;
+            display: inline-block;
+        }
+
+        /* Totals Area */
+        .totals-area {
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .grand-total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px solid #000;
+        }
+
+        /* Footer & QR Code */
+        .footer {
+            text-align: center;
+            font-size: 12px;
+        }
+        .qr-section {
+            margin: 15px 0;
+            text-align: center;
+        }
+        .qr-placeholder {
+            width: 120px;
+            height: 120px;
+            border: 2px solid #000;
+            margin: 0 auto 5px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #000;
+            background-image: repeating-linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0), repeating-linear-gradient(45deg, #f0f0f0 25%, #fff 25%, #fff 75%, #f0f0f0 75%, #f0f0f0);
+            background-position: 0 0, 10px 10px;
+            background-size: 20px 20px;
+        }
+        .security-code {
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .ncf-box, .client-info {
+                background-color: transparent !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .qr-placeholder { background-image: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-header">
+        <h1 class="hotel-name">Hotel Vista Mar</h1>
+        <div class="fiscal-data">Inversiones Costa Sur SRL</div>
+        <div class="fiscal-data bold">RNC: 1-01-12345-1</div>
+        <div class="fiscal-data">Av. Principal #123, Zona Costera</div>
+        <div class="fiscal-data">Tel: (555) 123-4567</div>
+    </div>
+
+    <div class="ncf-box">
+        <div class="ncf-title">Comprobante de Crédito Fiscal Electrónico</div>
+        <div class="ncf-number">e-NCF: E310000005678</div>
+    </div>
+
+    <div class="client-info">
+        <div class="client-info-title">DATOS DEL COMPRADOR</div>
+        <div style="margin-bottom: 5px;">
+            <span style="font-size: 11px;">Razón Social:</span><br>
+            <strong>TECNOLOGÍAS DOMINICANAS SRL</strong>
+        </div>
+        <div class="info-row highlight-rnc">
+            <span>RNC:</span>
+            <span>1-31-98765-4</span>
+        </div>
+        <div class="info-row" style="margin-top: 5px; font-size: 11px;">
+            <span>Fecha: 09/09/2026</span>
+            <span>Hora: 14:30</span>
+        </div>
+    </div>
+
+    <div class="ticket-body">
+        <table class="item-table">
+            <thead>
+                <tr>
+                    <th>Cant</th>
+                    <th>Descripción</th>
+                    <th class="right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="item-qty">2</span></td>
+                    <td>Almuerzo Ejecutivo<br><small>@ 1,500.00</small></td>
+                    <td class="right">3,000.00</td>
+                </tr>
+                <tr>
+                    <td><span class="item-qty">2</span></td>
+                    <td>Botella de Agua (P)<br><small>@ 150.00</small></td>
+                    <td class="right">300.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="totals-area">
+        <div class="total-row">
+            <span>Subtotal Gravado:</span>
+            <span>RD$ 3,300.00</span>
+        </div>
+        <div class="total-row">
+            <span>ITBIS (18%):</span>
+            <span>RD$ 594.00</span>
+        </div>
+        <div class="total-row">
+            <span>Propina Legal (10%):</span>
+            <span>RD$ 330.00</span>
+        </div>
+        
+        <div class="total-row grand-total">
+            <span>TOTAL FACTURA:</span>
+            <span>RD$ 4,224.00</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div style="text-align: left; margin-bottom: 10px; font-size: 11px;">
+            <strong>Método de Pago:</strong><br>
+            Tarjeta de Crédito Corporativa: RD$ 4,224.00<br>
+            Aprobación VISA: 112233
+        </div>
+
+        <div class="qr-section">
+            <div class="qr-placeholder">
+                [ QR DGII ]<br><br>Escanear para<br>validar e-CF
+            </div>
+            <div>Cód. Seguridad DGII: <span class="security-code">ab89xyz</span></div>
+        </div>
+        
+        Representación impresa de un<br>
+        Comprobante Fiscal Electrónico (e-CF)<br>
+        Consulte su validez en dgii.gov.do
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket de Cortesía / Consumo Interno</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Thermal printer width */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            font-size: 13px;
+        }
+
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .hotel-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .courtesy-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 8px 5px;
+            border: 2px solid #000;
+            background-color: #000;
+            color: #fff; /* Inverted for maximum attention */
+            text-align: center;
+        }
+
+        .control-section {
+            border-bottom: 1px dashed #000;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        .highlight-data {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .reason-box {
+            margin-top: 5px;
+            padding: 5px;
+            background-color: #f0f0f0;
+            font-style: italic;
+        }
+
+        .items-body {
+            border-bottom: 1px dashed #666;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .item-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            align-items: flex-start;
+        }
+        .item-qty { width: 25px; flex-shrink: 0; font-weight: bold;}
+        .item-desc { flex-grow: 1; padding-right: 5px; }
+        
+        .price-container {
+            width: 100%;
+            text-align: right;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        .struck-price {
+            text-decoration: line-through;
+            color: #777;
+            margin-right: 10px;
+        }
+        .zero-price {
+            font-weight: bold;
+        }
+
+        .totals-area {
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        .grand-total {
+            font-size: 16px;
+            font-weight: bold;
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            margin-top: 5px;
+        }
+
+        .signature-area {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        .signature-line {
+            width: 80%;
+            margin: 30px auto 5px auto;
+            border-bottom: 1px solid #000;
+        }
+        .inventory-note {
+            font-size: 10px;
+            font-style: italic;
+            color: #555;
+            text-align: justify;
+            margin-top: 15px;
+        }
+
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .courtesy-title {
+                background-color: transparent !important;
+                color: #000 !important;
+                border: 3px solid #000;
+                -webkit-print-color-adjust: exact;
+            }
+            .reason-box {
+                background-color: transparent !important;
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-header">
+        <h1 class="hotel-name">Hotel Vista Mar</h1>
+        <div class="courtesy-title">*** CORTESÍA / CONSUMO INTERNO ***</div>
+        <div class="info-row" style="font-size: 12px;">
+            <span>Fecha: 09/09/2026</span>
+            <span>Hora: 10:23 AM</span>
+        </div>
+        <div class="info-row" style="font-size: 12px;">
+            <span>Punto Venta: Bar Piscina</span>
+            <span>Ticket: #1048</span>
+        </div>
+    </div>
+
+    <div class="control-section">
+        <div class="info-row">
+            <span>Beneficiario:</span>
+            <span class="highlight-data">Alejandro Vásquez</span>
+        </div>
+        <div class="info-row">
+            <span>Referencia:</span>
+            <span>Huésped VIP - Hab 402</span>
+        </div>
+        <div class="info-row">
+            <span>Autoriza:</span>
+            <span class="highlight-data">Marta R. (Gerencia)</span>
+        </div>
+        
+        <div class="reason-box">
+            <strong>Motivo:</strong> Aniversario de Bodas del huésped. Botella y picadera de cortesía enviadas a la piscina.
+        </div>
+    </div>
+
+    <div class="items-body">
+        <div class="item-row">
+            <span class="item-qty">1x</span>
+            <span class="item-desc">Botella de Vino Espumante</span>
+            <div class="price-container">
+                <span class="struck-price">RD$ 2,500.00</span>
+                <span class="zero-price">RD$ 0.00</span>
+            </div>
+        </div>
+        
+        <div class="item-row">
+            <span class="item-qty">1x</span>
+            <span class="item-desc">Tabla de Quesos Mixtos</span>
+            <div class="price-container">
+                <span class="struck-price">RD$ 1,200.00</span>
+                <span class="zero-price">RD$ 0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="totals-area">
+        <div class="total-row">
+            <span>Valor de Costo / Real:</span>
+            <span>RD$ 3,700.00</span>
+        </div>
+        <div class="total-row">
+            <span>Descuento Gerencial (100%):</span>
+            <span>-RD$ 3,700.00</span>
+        </div>
+        <div class="total-row grand-total">
+            <span>TOTAL A COBRAR:</span>
+            <span>RD$ 0.00</span>
+        </div>
+    </div>
+
+    <div class="signature-area">
+        <div class="signature-line"></div>
+        <div>Firma del Gerente en Turno</div>
+
+        <div class="signature-line"></div>
+        <div>Firma del Huésped / Empleado</div>
+
+        <p class="inventory-note">
+            * NOTA PARA AUDITORÍA: Este ticket ampara el descargo de los artículos listados del inventario de A&B (Alimentos y Bebidas) sin generar impacto en los ingresos por ventas.
+        </p>
+    </div>
+
+</body>
+</html>

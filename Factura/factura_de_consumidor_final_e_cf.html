@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura de Consumidor Final (e-CF)</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Thermal printer width */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            font-size: 13px;
+        }
+
+        /* Header Styles */
+        .ticket-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .hotel-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+        .fiscal-data {
+            font-size: 12px;
+            margin: 2px 0;
+        }
+
+        /* e-NCF Block */
+        .ncf-box {
+            border: 2px solid #000;
+            padding: 8px 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .ncf-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+        .ncf-number {
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Client Info */
+        .client-info {
+            border-bottom: 1px dashed #000;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        .generic-client {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* Items Table */
+        .ticket-body {
+            border-bottom: 1px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .item-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .item-table th {
+            text-align: left;
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+        }
+        .item-table th.right, .item-table td.right {
+            text-align: right;
+        }
+        .item-table td {
+            padding: 4px 0;
+            vertical-align: top;
+        }
+        .item-qty {
+            width: 25px;
+            display: inline-block;
+        }
+
+        /* Totals Area */
+        .totals-area {
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .grand-total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px solid #000;
+        }
+
+        /* Footer & Payment */
+        .payment-info {
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+        }
+        .qr-placeholder {
+            width: 100px;
+            height: 100px;
+            border: 1px dashed #000;
+            margin: 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .ncf-box {
+                border: 2px solid #000;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-header">
+        <h1 class="hotel-name">Hotel Vista Mar</h1>
+        <div class="fiscal-data">Razón Social: Inversiones Costa Sur SRL</div>
+        <div class="fiscal-data">RNC: 1-01-12345-1</div>
+        <div class="fiscal-data">Av. Principal #123, Zona Costera</div>
+        <div class="fiscal-data">Tel: (555) 123-4567</div>
+    </div>
+
+    <div class="ncf-box">
+        <div class="ncf-title">Comprobante de Consumidor Final Electrónico</div>
+        <div class="ncf-number">e-NCF: E320000001234</div>
+    </div>
+
+    <div class="client-info">
+        <div class="generic-client">Cliente: CONSUMIDOR FINAL</div>
+        <div class="info-row">
+            <span>RNC/Cédula: NO APLICA</span>
+        </div>
+        <div class="info-row">
+            <span>Fecha: 09/09/2026</span>
+            <span>Hora: 22:15</span>
+        </div>
+        <div class="info-row">
+            <span>Mesa: 12</span>
+            <span>Ord: #1050</span>
+        </div>
+        <div class="info-row">
+            <span>Cajero: LRM</span>
+            <span>Mesero: Juan P.</span>
+        </div>
+    </div>
+
+    <div class="ticket-body">
+        <table class="item-table">
+            <thead>
+                <tr>
+                    <th>Cant</th>
+                    <th>Descripción</th>
+                    <th class="right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="item-qty">2</span></td>
+                    <td>Ribeye Angus (12oz)<br><small>@ 1,200.00</small></td>
+                    <td class="right">2,400.00</td>
+                </tr>
+                <tr>
+                    <td><span class="item-qty">2</span></td>
+                    <td>Mojito Clásico<br><small>@ 400.00</small></td>
+                    <td class="right">800.00</td>
+                </tr>
+                <tr>
+                    <td><span class="item-qty">1</span></td>
+                    <td>Volcán de Chocolate<br><small>@ 350.00</small></td>
+                    <td class="right">350.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="totals-area">
+        <div class="total-row">
+            <span>Subtotal:</span>
+            <span>RD$ 3,550.00</span>
+        </div>
+        <div class="total-row">
+            <span>ITBIS (18%):</span>
+            <span>RD$ 639.00</span>
+        </div>
+        <div class="total-row">
+            <span>Propina Legal (10%):</span>
+            <span>RD$ 355.00</span>
+        </div>
+        
+        <div class="total-row grand-total">
+            <span>TOTAL A PAGAR:</span>
+            <span>RD$ 4,544.00</span>
+        </div>
+    </div>
+
+    <div class="payment-info">
+        <strong>Método de Pago:</strong>
+        <div class="total-row">
+            <span>Tarjeta de Crédito / Débito:</span>
+            <span>RD$ 4,544.00</span>
+        </div>
+        <div class="total-row">
+            <span>Cambio:</span>
+            <span>RD$ 0.00</span>
+        </div>
+        <div style="margin-top: 5px; font-size: 11px;">
+            Aprobación VISA: 445566
+        </div>
+    </div>
+
+    <div class="footer">
+        Representación impresa de un<br>
+        Comprobante Fiscal Electrónico (e-CF)
+        
+        <!-- Standard placeholder for DGII QR Code validation on e-CF -->
+        <div class="qr-placeholder">
+            [ Código QR DGII ]
+        </div>
+        
+        ¡Gracias por preferirnos!<br>
+        Vuelva Pronto
+    </div>
+
+</body>
+</html>

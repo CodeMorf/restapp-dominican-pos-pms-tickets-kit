@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comanda de Estaciones Secundarias</title>
+    
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Ancho típico de impresora térmica */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #f4f4f4; /* Ligero fondo para resaltar los tickets blancos en pantalla */
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .ticket-wrapper {
+            background-color: #fff;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Header Styles */
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        /* Ultra prominent station identifier */
+        .station-banner {
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #000;
+            color: #fff;
+            padding: 5px 0;
+            margin: 5px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header-info {
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            margin: 2px 0;
+            font-weight: bold;
+        }
+        .header-subinfo {
+            font-size: 14px;
+            text-align: left;
+            margin-top: 5px;
+        }
+
+        /* Body Styles (Items) */
+        .ticket-body {
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .item-row {
+            margin-bottom: 15px;
+        }
+        
+        .item-main {
+            display: flex;
+            align-items: flex-start;
+            font-size: 22px; /* Letra extra grande para el cocinero de línea */
+            font-weight: bold;
+            line-height: 1.1;
+        }
+        .item-qty {
+            margin-right: 8px;
+            min-width: 28px;
+            border-right: 2px solid #000;
+            padding-right: 5px;
+        }
+        .item-name {
+            flex-grow: 1;
+            padding-left: 5px;
+        }
+        .item-notes {
+            font-size: 15px;
+            font-weight: bold;
+            font-style: italic;
+            margin-left: 45px; /* Alineado debajo del nombre */
+            margin-top: 4px;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 2px;
+            border-left: 3px solid #666;
+        }
+        .urgent-note {
+            color: #000;
+            border: 1px solid #000;
+            padding: 2px 4px;
+            display: inline-block;
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Footer Styles */
+        .ticket-footer {
+            font-size: 13px;
+        }
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 3px 0;
+        }
+
+        /* Visual Separator for the demo */
+        .cut-line {
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 20px;
+            color: #888;
+            position: relative;
+        }
+        .cut-line::before, .cut-line::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            border-top: 2px dashed #888;
+        }
+        .cut-line::before { left: 0; }
+        .cut-line::after { right: 0; }
+
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+            .ticket-wrapper {
+                box-shadow: none;
+            }
+            .cut-line {
+                display: none; /* No imprimir la línea de corte en impresora real */
+            }
+            .station-banner {
+                background-color: transparent !important;
+                color: #000 !important;
+                border: 4px solid #000;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-wrapper">
+        <div class="ticket-header">
+            <div class="station-banner">PARRILLA / GRILL</div>
+            <div class="header-info">
+                <span>Mesa: 15</span>
+                <span>Ord: #1047</span>
+            </div>
+            <div class="header-subinfo">
+                Mesero: Pedro D. | Comensales: 4
+            </div>
+        </div>
+
+        <div class="ticket-body">
+            <!-- Item Grill 1 -->
+            <div class="item-row">
+                <div class="item-main">
+                    <span class="item-qty">2x</span>
+                    <span class="item-name">Ribeye Angus (12oz)</span>
+                </div>
+                <div class="item-notes">
+                    - 1 TÉRMINO 3/4<br>
+                    - 1 TÉRMINO MEDIO<br>
+                    <span class="urgent-note">Fuego Fuerte</span>
+                </div>
+            </div>
+
+            <!-- Item Grill 2 -->
+            <div class="item-row">
+                <div class="item-main">
+                    <span class="item-qty">1x</span>
+                    <span class="item-name">Churrasco al Carbón</span>
+                </div>
+                <div class="item-notes">
+                    - BIEN COCIDO<br>
+                    - Sin Chimichurri
+                </div>
+            </div>
+        </div>
+
+        <div class="ticket-footer">
+            <div class="footer-row">
+                <span>Enviado:</span>
+                <span>20:15:30</span>
+            </div>
+            <div class="footer-row">
+                <span>Llegada (Turno):</span>
+                <span>#58</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="cut-line">✂</div>
+
+    <div class="ticket-wrapper">
+        <div class="ticket-header">
+            <div class="station-banner">POSTRES Y CAFÉ</div>
+            <div class="header-info">
+                <span>Mesa: 15</span>
+                <span>Ord: #1047</span>
+            </div>
+            <div class="header-subinfo">
+                Mesero: Pedro D. | <strong>MARCHAR AL AVISO</strong>
+            </div>
+        </div>
+
+        <div class="ticket-body">
+            <!-- Item Postre 1 -->
+            <div class="item-row">
+                <div class="item-main">
+                    <span class="item-qty">1x</span>
+                    <span class="item-name">Volcán de Chocolate</span>
+                </div>
+                <div class="item-notes">
+                    - Helado de vainilla aparte<br>
+                    - Extra sirope
+                </div>
+            </div>
+            
+            <!-- Item Postre 2 -->
+            <div class="item-row">
+                <div class="item-main">
+                    <span class="item-qty">1x</span>
+                    <span class="item-name">Tiramisú Clásico</span>
+                </div>
+            </div>
+
+            <!-- Item Café -->
+            <div class="item-row">
+                <div class="item-main">
+                    <span class="item-qty">2x</span>
+                    <span class="item-name">Espresso Doble</span>
+                </div>
+                <div class="item-notes">
+                    - 1 Corto de agua<br>
+                    - 1 Descafeinado
+                </div>
+            </div>
+        </div>
+
+        <div class="ticket-footer">
+            <div class="footer-row">
+                <span>Enviado:</span>
+                <span>20:15:30</span>
+            </div>
+            <div class="footer-row">
+                <span>Llegada (Turno):</span>
+                <span>#58</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

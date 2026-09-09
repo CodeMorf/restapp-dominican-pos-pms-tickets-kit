@@ -1,0 +1,19 @@
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Temporales y salidas locales
+*.tmp
+*.temp
+*.log
+dist/
+build/
+coverage/
+
+# Variables o credenciales locales
+.env
+.env.*
+!.env.example

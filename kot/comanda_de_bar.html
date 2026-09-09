@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comanda de Bar</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            width: 300px; /* Typical thermal printer width */
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Header Styles */
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            letter-spacing: 2px;
+        }
+        .header-info {
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            margin: 2px 0;
+        }
+
+        /* Body Styles (Items) */
+        .ticket-body {
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .item-row {
+            margin-bottom: 15px;
+        }
+        .item-main {
+            display: flex;
+            align-items: flex-start;
+            font-size: 20px; /* Very large text for the bartender */
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        .item-qty {
+            margin-right: 10px;
+            min-width: 25px;
+        }
+        .item-name {
+            flex-grow: 1;
+        }
+        .item-notes {
+            font-size: 14px;
+            font-weight: normal;
+            font-style: italic;
+            margin-left: 35px; /* Align with item name */
+            margin-top: 3px;
+            color: #333;
+        }
+
+        /* Footer Styles */
+        .ticket-footer {
+            font-size: 14px;
+        }
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 3px 0;
+        }
+        
+        /* Print specific styling */
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticket-header">
+        <h1 class="header-title">*** BAR ***</h1>
+        <div class="header-info">
+            <span>Orden: #1046</span>
+            <span>Mesa: 8</span>
+        </div>
+        <div class="header-info">
+            <span>Mesero: Carlos M.</span>
+        </div>
+    </div>
+
+    <div class="ticket-body">
+        <!-- Item 1 -->
+        <div class="item-row">
+            <div class="item-main">
+                <span class="item-qty">2x</span>
+                <span class="item-name">Mojito Clásico</span>
+            </div>
+            <div class="item-notes">
+                - 1 Con mucho hielo<br>
+                - 1 Sin azúcar
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="item-row">
+            <div class="item-main">
+                <span class="item-qty">1x</span>
+                <span class="item-name">Cerveza IPA</span>
+            </div>
+            <div class="item-notes">
+                - Vaso bien frío
+            </div>
+        </div>
+        
+        <!-- Item 3 -->
+        <div class="item-row">
+            <div class="item-main">
+                <span class="item-qty">1x</span>
+                <span class="item-name">Margarita</span>
+            </div>
+            <div class="item-notes">
+                - Sin sal en el borde
+            </div>
+        </div>
+    </div>
+
+    <div class="ticket-footer">
+        <div class="footer-row">
+            <span>Enviado:</span>
+            <span>19:45:00</span>
+        </div>
+        <div class="footer-row">
+            <span>Turno (Llegada):</span>
+            <span>#46</span>
+        </div>
+        <div class="footer-row">
+            <span>T. Promedio Estimado:</span>
+            <span>5 min</span>
+        </div>
+    </div>
+
+</body>
+</html>
