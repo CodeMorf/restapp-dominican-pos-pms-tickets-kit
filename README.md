@@ -113,6 +113,11 @@ Esta publicación entrega la capa de plantillas visuales. Quedan a cargo del sis
 - cola, reintentos e idempotencia de impresión;
 - pruebas fiscales, funcionales, de accesibilidad y de hardware.
 
+La integración web real con RestaAPP y Mesero está documentada en
+[`INTEGRACION_RESTAAPP_MESERO.md`](INTEGRACION_RESTAAPP_MESERO.md). El kit
+continúa siendo la referencia visual; el backend mantiene la autoridad sobre
+datos de la orden, fiscalidad, aislamiento por sucursal, PrintJob e impresión.
+
 ## Autoría
 
 Desarrollado por **CodeMorf** para integrarse con productos POS/PMS de la familia correspondiente. La marca visible del establecimiento, restaurante u hotel debe configurarse en el sistema cliente y no asumirse desde estos ejemplos.
